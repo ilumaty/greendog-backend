@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/logo.png" alt="Green Dog Logo" width="200"/>
+  <img src="docs/Logo_W.png" alt="Green Dog Logo" width="200"/>
   <h1>Green Dog — Backend API</h1>
 </div>
 
@@ -25,7 +25,7 @@ npm run dev
 
 Le serveur demarre sur `http://localhost:5000`
 
-### 4. Peupler la base de donnees
+### 4. Add la base de données avec des données
 ```bash
 npm run seed
 ```
