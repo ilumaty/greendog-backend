@@ -1,6 +1,6 @@
 <div align="center">
   <img src="docs/Logo_W.png" alt="Green Dog Logo" width="200"/>
-  <h1>Green Dog — Backend API</h1>
+  <h2>Backend API</h2>
 </div>
 
 API Node.js/Express Green Dog - Plateforme Wiki de partage sur les races de chiens.
