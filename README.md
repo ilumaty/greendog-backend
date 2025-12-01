@@ -3,7 +3,7 @@
   <h2>Backend API</h2>
 </div>
 
-API Node.js/Express Green Dog - Plateforme Wiki de partage sur les races de chiens.
+API Node.js/Express - Plateforme Wiki de partage sur les chiens
 
 ## Demarrage rapide
 
