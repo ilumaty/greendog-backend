@@ -192,9 +192,5 @@ npm run seed
 ```
 
 ---
+Projet SAE Institute Geneva - 5FSC0XF101.1
 
-**Projet** : Green Dog - SAE Institute Geneva  
-**Module** : 5FSC0XF101.1 - App Project  
-**Auteur** : Leo Maxime  
-**Version** : 1.0.0  
-**Date** : Novembre 2025
