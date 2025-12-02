@@ -114,7 +114,7 @@ Le token est retourne lors du login/signup.
 
 ## Base de donnees
 
-MongoDB avec Mongoose ODM.
+MongoDB
 
 ### Modèles
 - **users** : Comptes utilisateurs et authentification
