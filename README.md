@@ -189,6 +189,7 @@ npm start
 
 # Initialiser la base de données
 npm run seed
+```
 
 ---
 
