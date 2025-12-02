@@ -165,7 +165,7 @@ Toutes les réponses suivent la structure :
 | 200 | Succès |
 | 201 | Crée |
 | 400 | Requête invalide |
-| 401 | Non authentifie |
+| 401 | Non authentifié |
 | 403 | Non autorisé |
 | 404 | Non trouvé |
 | 500 | Erreur serveur |
