@@ -50,3 +50,6 @@ Thumbs.db
 # Test
 .mocha_output
 test-results/
+
+# JetBrains
+qodana.yaml

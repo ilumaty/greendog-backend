@@ -1,4 +1,4 @@
-<div style="text-align: center">
+<div align="center">
   <img src="docs/Logo_W.png" alt="Green Dog Logo" width="200"/>
   <h2>Backend API</h2>
 </div>
