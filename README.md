@@ -1,4 +1,4 @@
-<div align="center">
+<div style="text-align: center">
   <img src="docs/Logo_W.png" alt="Green Dog Logo" width="200"/>
   <h2>Backend API</h2>
 </div>
@@ -14,6 +14,7 @@ npm install
 
 ### 2. Configurer l'environnement
 ```bash
+
 cp .env.example .env
 # Editer .env avec votre URI MongoDB et secrets JWT
 ```
@@ -63,45 +64,45 @@ green-dog-backend/
 └── README.md
 ```
 
-## Endpoints disponibles
+## Endpoints
 
 ### Authentification
-| Méthode | Route | Accès | Description |
-|---------|-------|-------|-------------|
-| POST | `/api/auth/signup` | Public | Inscription nouvel utilisateur |
-| POST | `/api/auth/login` | Public | Connexion utilisateur |
-| GET | `/api/auth/profile` | Privé | Obtenir le profil |
-| PUT | `/api/auth/profile` | Privé | Modifier le profil |
-| POST | `/api/auth/change-password` | Privé | Changer le mot de passe |
-| POST | `/api/auth/logout` | Privé | Déconnexion |
+| Méthode | Route                       | Accès  | Description                    |
+|---------|-----------------------------|--------|--------------------------------|
+| POST    | `/api/auth/signup`          | Public | Inscription nouvel utilisateur |
+| POST    | `/api/auth/login`           | Public | Connexion utilisateur          |
+| GET     | `/api/auth/profile`         | Privé  | Obtenir le profil              |
+| PUT     | `/api/auth/profile`         | Privé  | Modifier le profil             |
+| POST    | `/api/auth/change-password` | Privé  | Changer le mot de passe        |
+| POST    | `/api/auth/logout`          | Privé  | Déconnexion                    |
 
 ### Races de chiens
-| Methode | Route | Accès | Description |
-|---------|-------|-------|-------------|
-| GET | `/api/dogs/breeds` | Public | Liste des races (paginee) |
-| GET | `/api/dogs/breeds/:id` | Public | Detail d'une race |
-| POST | `/api/dogs/breeds/search` | Public | Recherche textuelle |
-| POST | `/api/dogs/breeds/filter` | Public | Filtrage par caracteristiques |
-| POST | `/api/dogs/favorites/:id` | Privé | Ajouter aux favoris |
-| DELETE | `/api/dogs/favorites/:id` | Privé | Retirer des favoris |
-| GET | `/api/dogs/favorites` | Privé | Liste des favoris |
+| Méthode | Route                     | Accès  | Description                   |
+|---------|---------------------------|--------|-------------------------------|
+| GET     | `/api/dogs/breeds`        | Public | Liste des races (paginée)     |
+| GET     | `/api/dogs/breeds/:id`    | Public | Détail d'une race             |
+| POST    | `/api/dogs/breeds/search` | Public | Recherche textuelle           |
+| POST    | `/api/dogs/breeds/filter` | Public | Filtrage par caractéristiques |
+| POST    | `/api/dogs/favorites/:id` | Privé  | Ajouter aux favoris           |
+| DELETE  | `/api/dogs/favorites/:id` | Privé  | Retirer des favoris           |
+| GET     | `/api/dogs/favorites`     | Privé  | Liste des favoris             |
 
 ### Communauté (Posts)
-| Methode | Route | Accès | Description |
-|---------|-------|-------|-------------|
-| GET | `/api/posts` | Public | Liste des posts (paginée) |
-| POST | `/api/posts` | Privé | Créer un post |
-| GET | `/api/posts/:id` | Public | Détail d'un post |
-| PUT | `/api/posts/:id` | Privé | Modifier un post (auteur) |
-| DELETE | `/api/posts/:id` | Privé | Supprimer un post (auteur) |
+| Méthode | Route            | Accès  | Description                |
+|---------|------------------|--------|----------------------------|
+| GET     | `/api/posts`     | Public | Liste des posts (paginée)  |
+| POST    | `/api/posts`     | Privé  | Créer un post              |
+| GET     | `/api/posts/:id` | Public | Détail d'un post           |
+| PUT     | `/api/posts/:id` | Privé  | Modifier un post (auteur)  |
+| DELETE  | `/api/posts/:id` | Privé  | Supprimer un post (auteur) |
 
 ### Commentaires
-| Methode | Route | Accès | Description |
-|---------|-------|-------|-------------|
-| GET | `/api/posts/:id/comments` | Public | Liste des commentaires |
-| POST | `/api/posts/:id/comments` | Privé | Ajouter un commentaire |
-| PUT | `/api/posts/:id/comments/:commentId` | Privé | Modifier (auteur) |
-| DELETE | `/api/posts/:id/comments/:commentId` | Privé | Supprimer (auteur) |
+| Méthode | Route                                | Accès  | Description            |
+|---------|--------------------------------------|--------|------------------------|
+| GET     | `/api/posts/:id/comments`            | Public | Liste des commentaires |
+| POST    | `/api/posts/:id/comments`            | Privé  | Ajouter un commentaire |
+| PUT     | `/api/posts/:id/comments/:commentId` | Privé  | Modifier (auteur)      |
+| DELETE  | `/api/posts/:id/comments/:commentId` | Privé  | Supprimer (auteur)     |
 
 ## Authentification
 
@@ -153,10 +154,12 @@ CLIENT_URL=http://localhost:3000
 Toutes les réponses suivent la structure :
 ```json
 {
-  "success": true/false,
+  "success": true,
   "message": "Message descriptif",
   "data": {}
 }
+```
+> `success` peut-être `true` ou `false`
 ```
 
 ### Codes HTTP
@@ -175,7 +178,7 @@ Toutes les réponses suivent la structure :
 - Mots de passe hashes avec bcryptjs
 - Authentification par JWT
 - Validation des entrées sur tous les endpoints
-- CORS configuré pour le frontend
+- CORS configurés pour le frontend
 - Middleware de gestion d'erreurs centralisé
 
 ## Scripts disponibles
