@@ -1,13 +1,13 @@
-<div align="center">
-  <img src="docs/Logo_W.png" alt="Green Dog Logo" width="200"/>
-  <h2>Backend API</h2>
+<div style="text-align: center">
+  <img src="docs/Logo_W.png" alt="Green Dog Logo" width="834" height="317"/>
+  <h1 style="text-align: center">Green Dog — Backend API</h1>
 </div>
 
-API Node.js/Express - Plateforme Wiki de partage sur les chiens
+API Node.js/Express Plateforme Wiki de partage sur les races de chiens.
 
-## Démarrage rapide
+## Demarrage rapide
 
-### 1. Installer les dépendances
+### 1. Installer les dependances
 ```bash
 npm install
 ```
@@ -25,12 +25,12 @@ npm run dev
 
 Le serveur démarre sur `http://localhost:5000`
 
-### 4. Initialiser la base de données
+### 4. Peupler la base de donnees
 ```bash
 npm run seed
 ```
 
-Ajoute des races de chiens et données de démonstration
+Ajoute des races de chiens de demonstration dans la base de donnees.
 
 ## Structure du projet
 
@@ -40,9 +40,9 @@ green-dog-backend/
 │   ├── config/
 │   │   └── database.js        # Connexion MongoDB
 │   ├── models/
-│   │   ├── User.js            # Schema user
+│   │   ├── User.js            # Schema utilisateur
 │   │   ├── Breed.js           # Schema race de chien
-│   │   ├── Post.js            # Schema post
+│   │   ├── Post.js            # Schema post communaute
 │   │   └── Comment.js         # Schema commentaire
 │   ├── controllers/
 │   │   ├── authController.js  # Logique authentification
@@ -51,13 +51,13 @@ green-dog-backend/
 │   ├── routes/
 │   │   ├── authRoutes.js      # Routes authentification
 │   │   ├── dogsRoutes.js      # Routes races
-│   │   └── postsRoutes.js     # Routes posts
+│   │   └── postsRoutes.js     # Routes communaute
 │   ├── middleware/
 │   │   ├── auth.js            # Verification JWT
-│   │   └── errorHandler.js    # Gestion centralisée des erreurs
+│   │   └── errorHandler.js    # Gestion centralisee des erreurs
 │   └── server.js              # Configuration Express
 ├── scripts/
-│   └── seedDatabase.js        # Script BDD
+│   └── seedDatabase.js        # Script de peuplement BDD
 ├── package.json
 ├── .env.example
 └── README.md
@@ -66,60 +66,60 @@ green-dog-backend/
 ## Endpoints disponibles
 
 ### Authentification
-| Méthode | Route | Accès | Description |
+| Methode | Route | Acces | Description |
 |---------|-------|-------|-------------|
 | POST | `/api/auth/signup` | Public | Inscription nouvel utilisateur |
 | POST | `/api/auth/login` | Public | Connexion utilisateur |
-| GET | `/api/auth/profile` | Privé | Obtenir le profil |
-| PUT | `/api/auth/profile` | Privé | Modifier le profil |
-| POST | `/api/auth/change-password` | Privé | Changer le mot de passe |
-| POST | `/api/auth/logout` | Privé | Déconnexion |
+| GET | `/api/auth/profile` | Prive | Obtenir le profil |
+| PUT | `/api/auth/profile` | Prive | Modifier le profil |
+| POST | `/api/auth/change-password` | Prive | Changer le mot de passe |
+| POST | `/api/auth/logout` | Prive | Deconnexion |
 
 ### Races de chiens
-| Methode | Route | Accès | Description |
+| Methode | Route | Acces | Description |
 |---------|-------|-------|-------------|
 | GET | `/api/dogs/breeds` | Public | Liste des races (paginee) |
 | GET | `/api/dogs/breeds/:id` | Public | Detail d'une race |
 | POST | `/api/dogs/breeds/search` | Public | Recherche textuelle |
 | POST | `/api/dogs/breeds/filter` | Public | Filtrage par caracteristiques |
-| POST | `/api/dogs/favorites/:id` | Privé | Ajouter aux favoris |
-| DELETE | `/api/dogs/favorites/:id` | Privé | Retirer des favoris |
-| GET | `/api/dogs/favorites` | Privé | Liste des favoris |
+| POST | `/api/dogs/favorites/:id` | Prive | Ajouter aux favoris |
+| DELETE | `/api/dogs/favorites/:id` | Prive | Retirer des favoris |
+| GET | `/api/dogs/favorites` | Prive | Liste des favoris |
 
-### Communauté (Posts)
-| Methode | Route | Accès | Description |
+### Communaute (Posts)
+| Methode | Route | Acces | Description |
 |---------|-------|-------|-------------|
-| GET | `/api/posts` | Public | Liste des posts (paginée) |
-| POST | `/api/posts` | Privé | Créer un post |
-| GET | `/api/posts/:id` | Public | Détail d'un post |
-| PUT | `/api/posts/:id` | Privé | Modifier un post (auteur) |
-| DELETE | `/api/posts/:id` | Privé | Supprimer un post (auteur) |
+| GET | `/api/posts` | Public | Liste des posts (paginee) |
+| POST | `/api/posts` | Prive | Creer un post |
+| GET | `/api/posts/:id` | Public | Detail d'un post |
+| PUT | `/api/posts/:id` | Prive | Modifier un post (auteur) |
+| DELETE | `/api/posts/:id` | Prive | Supprimer un post (auteur) |
 
 ### Commentaires
-| Methode | Route | Accès | Description |
+| Methode | Route | Acces | Description |
 |---------|-------|-------|-------------|
 | GET | `/api/posts/:id/comments` | Public | Liste des commentaires |
-| POST | `/api/posts/:id/comments` | Privé | Ajouter un commentaire |
-| PUT | `/api/posts/:id/comments/:commentId` | Privé | Modifier (auteur) |
-| DELETE | `/api/posts/:id/comments/:commentId` | Privé | Supprimer (auteur) |
+| POST | `/api/posts/:id/comments` | Prive | Ajouter un commentaire |
+| PUT | `/api/posts/:id/comments/:commentId` | Prive | Modifier (auteur) |
+| DELETE | `/api/posts/:id/comments/:commentId` | Prive | Supprimer (auteur) |
 
 ## Authentification
 
-Les endpoints privés nécessitent un header `Authorization` :
+Les endpoints prives necessitent un header `Authorization` :
 ```
 Authorization: Bearer {JWT_TOKEN}
 ```
 
-Le token est retourné lors du login/signup.
+Le token est retourne lors du login/signup.
 
-## Base de données
+## Base de donnees
 
-MongoDB
+MongoDB avec Mongoose ODM.
 
 ### Modèles
 - **users** : Comptes utilisateurs et authentification
 - **breeds** : Informations sur les races de chiens
-- **posts** : Publications de la communauté
+- **posts** : Publications de la communaute
 - **comments** : Commentaires sur les posts
 
 ### Races pre-configurées (seed)
@@ -133,7 +133,7 @@ MongoDB
 ## Variables d'environnement
 
 ```env
-# Base de données
+# Base de donnees
 MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/greendog
 
 # JWT
@@ -150,7 +150,7 @@ CLIENT_URL=http://localhost:3000
 
 ## Gestion des erreurs
 
-Toutes les réponses suivent la structure :
+Toutes les reponses suivent la structure :
 ```json
 {
   "success": true/false,
@@ -162,21 +162,21 @@ Toutes les réponses suivent la structure :
 ### Codes HTTP
 | Code | Signification |
 |------|---------------|
-| 200 | Succès |
-| 201 | Crée |
-| 400 | Requête invalide |
-| 401 | Non authentifié |
-| 403 | Non autorisé |
-| 404 | Non trouvé |
+| 200 | Succes |
+| 201 | Cree |
+| 400 | Requete invalide |
+| 401 | Non authentifie |
+| 403 | Non autorise |
+| 404 | Non trouve |
 | 500 | Erreur serveur |
 
-## Sécurité
+## Securite
 
-- Mots de passe hashes avec bcryptjs
+- Mots de passe hashes avec bcryptjs (salt: 12)
 - Authentification par JWT
-- Validation des entrées sur tous les endpoints
-- CORS configuré pour le frontend
-- Middleware de gestion d'erreurs centralisé
+- Validation des entrees sur tous les endpoints
+- CORS configure pour le frontend
+- Middleware de gestion d'erreurs centralise
 
 ## Scripts disponibles
 
@@ -187,10 +187,19 @@ npm run dev
 # Production
 npm start
 
-# Initialiser la base de données
+# add la base de donnees
 npm run seed
 ```
 
----
-Projet SAE Institute Geneva - 5FSC0XF101.1
+### Configuration production
+```bash
+NODE_ENV=production npm start
+```
 
+---
+
+**Projet** : Green Dog - SAE Institute Geneva  
+**Module** : 5FSC0XF101.1 - App Project  
+**Auteur** : Leo Maxime  
+**Version** : 1.0.0  
+**Date** : Novembre 2025
