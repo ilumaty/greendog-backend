@@ -21,17 +21,17 @@ export const signup = async (req, res, next) => {
 
     // Validation
     if (!email || !password || !firstName || !lastName) {
-      throw new AppError('Tous les champs sont requis', 400)
+      return next (new AppError('Tous les champs sont requis', 400))
     }
 
     if (password.length < 6) {
-      throw new AppError('Le mot de passe doit contenir au moins 6 caractères', 400)
+      return next (new AppError('Le mot de passe doit contenir au moins 6 caractères', 400))
     }
 
     // Contrôle si l'user est existant
     const existingUser = await User.findOne({ email: email.toLowerCase() })
     if (existingUser) {
-      throw new AppError('Cet email est déjà utilisé', 400)
+      return next (new AppError('Cet email est déjà utilisé', 400))
     }
 
     // Création de l'user
@@ -47,7 +47,7 @@ export const signup = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'User enregistré avec succès. Tu peux maintenant te connecter.',
+      message: 'Good joy, inscription réussie.',
       data: {
         user: {
           id: user._id,
@@ -70,19 +70,19 @@ export const login = async (req, res, next) => {
 
     // Validation
     if (!email || !password) {
-      throw new AppError('Email et password sont requis', 400)
+      return next (new AppError('Email et password sont requis', 400))
     }
 
     // Cherche l'user + inclu password
     const user = await User.findOne({ email: email.toLowerCase() }).select('+password')
     if (!user) {
-      throw new AppError('Identifiants invalides', 401)
+      return next (new AppError('Identifiants invalides', 401))
     }
 
     // Compare le password
     const isPasswordValid = await user.comparePassword(password)
     if (!isPasswordValid) {
-      throw new AppError('Identifiants invalides', 401)
+      return next (new AppError('Identifiants invalides', 401))
     }
 
     // Update dernière connection
@@ -116,7 +116,7 @@ export const getProfile = async (req, res, next) => {
     const user = await User.findById(req.userId).populate('favorites', 'name characteristics.size')
     
     if (!user) {
-      throw new AppError('User non trouvé', 404)
+      return next (new AppError('User non trouvé', 404))
     }
 
     res.json({
@@ -145,7 +145,7 @@ export const updateProfile = async (req, res, next) => {
     )
 
     if (!user) {
-      throw new AppError('User non trouvé', 404)
+      return next (new AppError('User non trouvé', 404))
     }
 
     res.json({
@@ -164,23 +164,23 @@ export const changePassword = async (req, res, next) => {
     const { currentPassword, newPassword } = req.body
 
     if (!currentPassword || !newPassword) {
-      throw new AppError('Les deux mot de passe sont requis', 400)
+      return next (new AppError('Les deux mot de passe sont requis', 400))
     }
 
     if (newPassword.length < 6) {
-      throw new AppError('Le nouveau mot de passe doit contenir plus de 6 caractères', 400)
+      return next (new AppError('Le nouveau mot de passe doit contenir plus de 6 caractères', 400))
     }
 
     const user = await User.findById(req.userId).select('+password')
     if (!user) {
-      throw new AppError('User non trouvé', 404)
+      return next (new AppError('User non trouvé', 404))
     }
 
     // Vérifie le mot de passe actuel
     const isValid = await user.comparePassword(currentPassword)
 
     if (!isValid) {
-      throw new AppError('Mot de passe actuel incorrect', 401)
+      return next (new AppError('Mot de passe actuel incorrect', 401))
     }
 
     // Le hook est en pre-save hash en clair auto

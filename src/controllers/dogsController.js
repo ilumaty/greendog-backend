@@ -44,7 +44,7 @@ export const searchBreeds = async (req, res, next) => {
     const { query } = req.body
 
     if (!query || query.trim().length === 0) {
-      throw new AppError('La recherche est requise', 400)
+      return next (new AppError('La recherche est requise', 400))
     }
 
     const breeds = await Breed.find(
@@ -88,7 +88,7 @@ export const getBreedById = async (req, res, next) => {
     const breed = await Breed.findById(req.params.id)
 
     if (!breed) {
-      throw new AppError('Race non trouvé', 404)
+      return next (new AppError('Race non trouvé', 404))
     }
 
     res.json({
@@ -108,7 +108,7 @@ export const addFavorite = async (req, res, next) => {
     // Verify breed exists
     const breed = await Breed.findById(breedId)
     if (!breed) {
-      throw new AppError('Race non trouvé', 404)
+      return next (new AppError('Race non trouvé', 404))
     }
 
     const user = await User.findByIdAndUpdate(
@@ -160,7 +160,7 @@ export const getFavorites = async (req, res, next) => {
     const user = await User.findById(req.userId).populate('favorites')
 
     if (!user) {
-      throw new AppError('Utilisateur non trouvé', 404)
+      return next (new AppError('Utilisateur non trouvé', 404))
     }
 
     res.json({

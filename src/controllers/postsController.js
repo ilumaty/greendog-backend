@@ -50,7 +50,7 @@ export const createPost = async (req, res, next) => {
     const { title, content, breedId, tags } = req.body
 
     if (!title || !content) {
-      throw new AppError('Title and content are required', 400)
+      return next (new AppError('Title and content are required', 400))
     }
 
     const post = await Post.create({
@@ -93,7 +93,7 @@ export const getPostById = async (req, res, next) => {
       })
 
     if (!post) {
-      throw new AppError('Post non trouvé', 404)
+      return next (new AppError('Post non trouvé', 404))
     }
 
     res.json({
@@ -112,12 +112,12 @@ export const updatePost = async (req, res, next) => {
 
     const post = await Post.findById(req.params.id)
     if (!post) {
-      throw new AppError('Post non trouvé', 404)
+      return next (new AppError('Post non trouvé', 404))
     }
 
     // Contrôle l'autorisation de l'user
     if (post.author.toString() !== req.userId) {
-      throw new AppError('Tu n\'es malheureusement pas autorisé à modifier ce post', 403)
+      return next (new AppError('Tu n\'es malheureusement pas autorisé à modifier ce post', 403))
     }
 
     post.title = title || post.title
@@ -142,12 +142,12 @@ export const deletePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id)
     if (!post) {
-      throw new AppError('Post non trouvé', 404)
+      return next (new AppError('Post non trouvé', 404))
     }
 
     // Contrôle l'autorisation de l'user
     if (post.author.toString() !== req.userId) {
-      throw new AppError('Tu n\'es pas autorisé à supprimer ce post', 403)
+      return next (new AppError('Tu n\'es pas autorisé à supprimer ce post', 403))
     }
 
     await Post.findByIdAndDelete(req.params.id)
@@ -184,13 +184,13 @@ export const addComment = async (req, res, next) => {
     const { content } = req.body
 
     if (!content || content.trim().length === 0) {
-      throw new AppError('Commentaire requis', 400)
+      return next (new AppError('Commentaire requis', 400))
     }
 
     // Vérifie les posts existants
     const post = await Post.findById(req.params.id)
     if (!post) {
-      throw new AppError('Post non trouvé', 404)
+      return next (new AppError('Post non trouvé', 404))
     }
 
     const comment = await Comment.create({
@@ -223,17 +223,17 @@ export const updateComment = async (req, res, next) => {
     const { content } = req.body
 
     if (!content || content.trim().length === 0) {
-      throw new AppError('Commentaire est requis', 400)
+      return next (new AppError('Commentaire est requis', 400))
     }
 
     const comment = await Comment.findById(req.params.commentId)
     if (!comment) {
-      throw new AppError('Commentaire non trouvé', 404)
+      return next (new AppError('Commentaire non trouvé', 404))
     }
 
     // Contrôle-les authorisations
     if (comment.author.toString() !== req.userId) {
-      throw new AppError('Tu n\'es pas autorisé à modifier ce commentaire', 403)
+      return next (new AppError('Tu n\'es pas autorisé à modifier ce commentaire', 403))
     }
 
     comment.content = content.trim()
@@ -256,12 +256,12 @@ export const deleteComment = async (req, res, next) => {
   try {
     const comment = await Comment.findById(req.params.commentId)
     if (!comment) {
-      throw new AppError('Commentaire non trouvé', 404)
+      return next (new AppError('Commentaire non trouvé', 404))
     }
 
     // Contrôle-les autorisations
     if (comment.author.toString() !== req.userId) {
-      throw new AppError('Tu n\'es pas autorisé à supprimer ce commentaire', 403)
+      return next (new AppError('Tu n\'es pas autorisé à supprimer ce commentaire', 403))
     }
 
     await Comment.findByIdAndDelete(req.params.commentId)
