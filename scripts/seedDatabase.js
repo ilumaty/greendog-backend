@@ -153,7 +153,7 @@ async function seedDatabase() {
     await Breed.deleteMany({})
     console.log('Races existantes supprimées')
 
-    // Insertion des races
+    // Insertion des races - capture le retour
     const insertedBreeds = await Breed.insertMany(breedsData)
     console.log(`${insertedBreeds.length} races ajoutées avec succès`)
 
@@ -163,12 +163,12 @@ async function seedDatabase() {
       console.log(`  - ${breed.name} (${breed.characteristics.size})`)
     })
 
-    console.log('\n✓ Dbb complétée avec succès')
+    console.log('\nBase de données complétée avec succès')
     process.exit(0)
   } catch (error) {
-    console.error('Erreur d\'envoi de la bdd de races', error.message)
+    console.error('Erreur d\'envoi de la bdd de races:', error.message)
     process.exit(1)
   }
 }
 
-seedDatabase()
+seedDatabase().catch(() => process.exit(1))

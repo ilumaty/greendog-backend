@@ -4,7 +4,7 @@
 
 // ** Gestion des erreurs **
 
-export const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res, _next) => {
   console.error('Error:', {
     message: err.message,
     code: err.code,

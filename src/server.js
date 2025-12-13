@@ -74,7 +74,8 @@ app.use(errorHandler)
 async function startServer() {
   try {
     if (!MONGODB_URI) {
-      throw new Error('MONGODB_URI pas défini dans .env')
+      console.error('MONGODB_URI pas défini dans .env')
+      process.exit(1)
     }
 
     await mongoose.connect(MONGODB_URI)
