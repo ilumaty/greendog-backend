@@ -123,6 +123,7 @@ process.on('SIGTERM', () => {
   }
 }
 
-startServer()
+startServer().catch(() => process.exit(1))
+
 
 export default app
