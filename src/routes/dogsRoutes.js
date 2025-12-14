@@ -1,6 +1,6 @@
 
 /* ════════════════════════════════════════
-        src/routes/dogsRoutes.js
+src/routes/dogsRoutes.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **

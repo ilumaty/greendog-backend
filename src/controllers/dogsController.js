@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════
-        controllers/dogsController.js
+controllers/dogsController.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **

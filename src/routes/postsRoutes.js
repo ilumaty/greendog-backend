@@ -1,6 +1,6 @@
 
 /* ════════════════════════════════════════
-        src/routes/postsRoutes.js
+src/routes/postsRoutes.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **

@@ -1,6 +1,6 @@
 
 /* ════════════════════════════════════════
-        src/routes/authRoutes.js
+src/routes/authRoutes.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **

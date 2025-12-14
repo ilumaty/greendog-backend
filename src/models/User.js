@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════
-        models/User.js
+models/User.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **
@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     required: [true, 'L\'email est requis'],
     unique: true,
     lowercase: true,
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Merci de mettre un email valide']
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Merci de mettre un email valide']
   },
   
   password: {

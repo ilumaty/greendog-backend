@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════
-        controllers/postsController.js
+controllers/postsController.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **

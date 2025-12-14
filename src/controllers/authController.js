@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════
-        controllers/authController.js
+controllers/authController.js
 /════════════════════════════════════════ */
 
 // ** IMPORTS **

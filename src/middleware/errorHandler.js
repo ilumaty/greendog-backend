@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════
-        middleware/errorHandler.js
+middleware/errorHandler.js
 /════════════════════════════════════════ */
 
 // ** Gestion des erreurs **
@@ -53,7 +53,7 @@ export const errorHandler = (err, req, res, _next) => {
     })
   }
 
-  // Custom error with statusCode
+  // Pour erreur status code
   if (err.statusCode) {
     return res.status(err.statusCode).json({
       success: false,
@@ -61,14 +61,14 @@ export const errorHandler = (err, req, res, _next) => {
     })
   }
 
-  // Generic error
+  // Error génériques
   res.status(err.statusCode || 500).json({
     success: false,
     message: err.message || 'Internal server error'
   })
 }
 
-// Custom error class
+// Gestion erreur
 export class AppError extends Error {
   constructor(message, statusCode) {
     super(message)
