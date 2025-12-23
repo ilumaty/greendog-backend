@@ -81,6 +81,7 @@ export const login = async (req, res, next) => {
 
     // Compare le password
     const isPasswordValid = await user.comparePassword(password)
+
     if (!isPasswordValid) {
       return next (new AppError('Identifiants invalides', 401))
     }
