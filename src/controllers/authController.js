@@ -47,13 +47,15 @@ export const signup = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'Good joy, inscription réussie.',
+      message: 'Good job, inscription réussie.',
       data: {
         user: {
           id: user._id,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          role: user.role,
+          createdAt: user.createdAt
         },
         token
       }
@@ -102,6 +104,7 @@ export const login = async (req, res, next) => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          createdAt: user.createdAt
         },
         token
       }
