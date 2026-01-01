@@ -23,6 +23,10 @@ const breedsData = [
       lifeExpectancy: { min: 12, max: 14 }
     },
     origin: 'Angleterre',
+    image: {
+      url: '/img/dogs_profile/staffy_b_show.jpg',
+      alt: 'Staffordshire Bull Terrier'
+    },
     care: {
       grooming: 'Pelage court et lisse nécessitant un brossage hebdomadaire et des bains occasionnels.',
       exercise: 'Besoins élevés en exercice - 1 à 2 heures par jour incluant jeux et promenades.',
@@ -45,6 +49,10 @@ const breedsData = [
       lifeExpectancy: { min: 10, max: 12 }
     },
     origin: 'Canada',
+    image: {
+      url: '/img/dogs_profile/labrador_r_w_show.jpg',
+      alt: 'Labrador Retriever'
+    },
     care: {
       grooming: 'Les Labradors perdent beaucoup de poils et nécessitent un brossage régulier pour gérer la mue.',
       exercise: 'Les Labradors ont besoin d\'au moins 1 à 2 heures d\'exercice quotidien pour rester en bonne santé.',
@@ -67,6 +75,10 @@ const breedsData = [
       lifeExpectancy: { min: 9, max: 13 }
     },
     origin: 'Allemagne',
+    image: {
+      url: '/img/dogs_profile/berger_a_w_show.jpg',
+      alt: 'Berger Allemand'
+    },
     care: {
       grooming: 'Double pelage nécessitant un brossage régulier et une forte mue lors des changements de saison.',
       exercise: 'Besoins élevés en exercice - plus de 2 heures par jour. La stimulation mentale est importante.',
@@ -89,6 +101,10 @@ const breedsData = [
       lifeExpectancy: { min: 10, max: 12 }
     },
     origin: 'Écosse',
+    image: {
+      url: '/img/dogs_profile/golden_r_w_show.jpg',
+      alt: 'Golden Retriever'
+    },
     care: {
       grooming: 'Double pelage dense nécessitant un brossage quotidien et une tonte régulière.',
       exercise: 'Besoin de 1 à 2 heures d\'exercice quotidien incluant promenades, courses ou natation.',
@@ -111,6 +127,10 @@ const breedsData = [
       lifeExpectancy: { min: 10, max: 12 }
     },
     origin: 'France',
+    image: {
+      url: '/img/dogs_profile/bouledogue_f_w_show.jpg',
+      alt: 'Bouledogue Français'
+    },
     care: {
       grooming: 'Pelage court nécessitant peu d\'entretien, mais les plis du visage doivent être nettoyés régulièrement.',
       exercise: 'Besoins modérés en exercice - promenades quotidiennes et temps de jeu suffisants.',
@@ -133,6 +153,10 @@ const breedsData = [
       lifeExpectancy: { min: 12, max: 15 }
     },
     origin: 'Angleterre',
+    image: {
+      url: '/img/dogs_profile/beagle_w_show.jpg',
+      alt: 'Beagle'
+    },
     care: {
       grooming: 'Pelage court nécessitant un brossage régulier et des bains occasionnels.',
       exercise: 'Besoins élevés en exercice - 1 à 2 heures par jour pour dépenser leur énergie.',
@@ -153,7 +177,7 @@ async function seedDatabase() {
     await Breed.deleteMany({})
     console.log('Races existantes supprimées')
 
-    // Insertion des races - capture le retour
+    // Insertion des races et capturer le retour
     const insertedBreeds = await Breed.insertMany(breedsData)
     console.log(`${insertedBreeds.length} races ajoutées avec succès`)
 

@@ -45,7 +45,7 @@ app.get('/health', (req, res) => {
     status: 'ok',
     timestamp: new Date().toISOString(),
     environment: NODE_ENV,
-    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    mongodb: mongoose.connection.readyState === 1 ? 'connecté' : 'déco'
   })
 })
 
@@ -126,6 +126,3 @@ process.on('SIGTERM', () => {
 }
 
 startServer().catch(() => process.exit(1))
-
-
-export default app
