@@ -50,7 +50,7 @@ export const signup = async (req, res, next) => {
       message: 'Good job, inscription réussie.',
       data: {
         user: {
-          id: user._id,
+          _id: user._id,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
@@ -100,7 +100,7 @@ export const login = async (req, res, next) => {
       message: 'Tu es connecté',
       data: {
         user: {
-          id: user._id,
+          _id: user._id,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
