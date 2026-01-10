@@ -82,6 +82,33 @@ export const filterBreeds = async (req, res, next) => {
   }
 }
 
+// POST /api/dogs/breeds
+export const createBreed = async (req, res, next) => {
+  try {
+    const { name, description, characteristics } = req.body
+
+    // Vérifie si les champs obligatoires sont présents
+    if (!name || !description || !characteristics?.size) {
+      return next(new AppError('name, description et characteristics.size sont requis', 400))
+    }
+
+    // Créer la race par nom et description dans la BDD
+    const breed = await Breed.create({
+      ...req.body,
+      name: name.trim(),
+      description: description.trim()
+    })
+
+    return res.status(201).json({
+      success: true,
+      message: 'Race ajoutée',
+      data: { breed }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 // GET /api/dogs/breeds/:id
 export const getBreedById = async (req, res, next) => {
   try {
@@ -143,6 +170,7 @@ export const removeFavorite = async (req, res, next) => {
 
     // Décrémentation des favoris /Race/
     await Breed.findByIdAndUpdate(breedId, { $inc: { favoriteCount: -1 } })
+    await Breed.findByIdAndUpdate(breedId, { $max: { favoriteCount: 0 } })
 
     res.json({
       success: true,
@@ -177,6 +205,7 @@ export default {
   searchBreeds,
   filterBreeds,
   getBreedById,
+  createBreed,
   addFavorite,
   removeFavorite,
   getFavorites

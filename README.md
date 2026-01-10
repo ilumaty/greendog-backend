@@ -14,8 +14,7 @@ npm install
 
 ### 2. Configurer l'environnement
 ```bash
-
-cp .env.example .env
+cp .env.example.env
 # Editer .env avec votre URI MongoDB et secrets JWT
 ```
 
@@ -77,15 +76,20 @@ green-dog-backend/
 | POST    | `/api/auth/logout`          | Privé  | Déconnexion                    |
 
 ### Races de chiens
-| Méthode | Route                     | Accès  | Description                   |
-|---------|---------------------------|--------|-------------------------------|
-| GET     | `/api/dogs/breeds`        | Public | Liste des races (paginée)     |
-| GET     | `/api/dogs/breeds/:id`    | Public | Détail d'une race             |
-| POST    | `/api/dogs/breeds/search` | Public | Recherche textuelle           |
-| POST    | `/api/dogs/breeds/filter` | Public | Filtrage par caractéristiques |
-| POST    | `/api/dogs/favorites/:id` | Privé  | Ajouter aux favoris           |
-| DELETE  | `/api/dogs/favorites/:id` | Privé  | Retirer des favoris           |
-| GET     | `/api/dogs/favorites`     | Privé  | Liste des favoris             |
+| Méthode | Route                     | Accès   | Description                   |
+|---------|---------------------------|---------|-------------------------------|
+| GET     | `/api/dogs/breeds`        | Public  | Liste des races (paginée)     |
+| GET     | `/api/dogs/breeds/:id`    | Public  | Détail d'une race             |
+| POST    | `/api/dogs/breeds/search` | Public  | Recherche textuelle           |
+| POST    | `/api/dogs/breeds/filter` | Public  | Filtrage par caractéristiques |
+| POST    | `/api/dogs/breeds`        | Admin   | Créer une nouvelle race       |
+
+### Favoris
+| Méthode | Route                          | Accès  | Description                   |
+|---------|--------------------------------|--------|-------------------------------|
+| GET     | `/api/dogs/favorites`          | Privé  | Liste des races favorites     |
+| POST    | `/api/dogs/favorites/:breedId` | Privé  | Ajouter une race aux favoris  |
+| DELETE  | `/api/dogs/favorites/:breedId` | Privé  | Retirer une race des favoris  |
 
 ### Communauté (Posts)
 | Méthode | Route            | Accès  | Description                |

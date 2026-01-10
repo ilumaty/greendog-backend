@@ -54,6 +54,7 @@ export const signup = async (req, res, next) => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          bio: user.bio,
           role: user.role,
           createdAt: user.createdAt
         },
@@ -104,6 +105,8 @@ export const login = async (req, res, next) => {
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
+          bio: user.bio,
+          role: user.role,
           createdAt: user.createdAt
         },
         token

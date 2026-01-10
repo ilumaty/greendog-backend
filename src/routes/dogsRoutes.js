@@ -5,7 +5,7 @@ src/routes/dogsRoutes.js
 
 // ** IMPORTS **
 import express from 'express'
-import { verifyToken } from '../middleware/auth.js'
+import { verifyToken, requireAdmin } from '../middleware/auth.js'
 import {
   getBreeds,
   getBreedById,
@@ -13,7 +13,8 @@ import {
   filterBreeds,
   addFavorite,
   removeFavorite,
-  getFavorites
+  getFavorites,
+    createBreed
 } from '../controllers/dogsController.js'
 
 const router = express.Router()
@@ -25,7 +26,6 @@ const router = express.Router()
  * params:
  */
 router.get('/favorites', verifyToken, getFavorites)
-
 
 /**
  * GET /api/dogs/breeds
@@ -50,6 +50,14 @@ router.post('/breeds/search', searchBreeds)
  * Body: { size: "string", temperament: "string", activityLevel: "string" }
  */
 router.post('/breeds/filter', filterBreeds)
+
+/**
+ * POST /api/dogs/breeds/
+ * Créer une nouvelle race
+ * PRIVATE (ADMIN)
+ * Body: { size: "string", temperament: "string", activityLevel: "string" }
+ */
+router.post('/breeds', verifyToken, requireAdmin, createBreed)
 
 /**
  * GET /api/dogs/breeds/:id
