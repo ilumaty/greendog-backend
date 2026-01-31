@@ -109,6 +109,61 @@ export const createBreed = async (req, res, next) => {
   }
 }
 
+// PUT /api/dogs/breeds/:id (ADMIN)
+export const updateBreed = async (req, res, next) => {
+  try {
+    const { name, description, characteristics, images, origin, lifespan } = req.body
+
+    const breed = await Breed.findById(req.params.id)
+    if (!breed) {
+      return next(new AppError('Race non trouvée', 404))
+    }
+
+    // MàJ des champs
+    if (name) breed.name = name.trim()
+    if (description) breed.description = description.trim()
+    if (characteristics) breed.characteristics = { ...breed.characteristics, ...characteristics }
+    if (images) breed.images = images
+    if (origin) breed.origin = origin
+    if (lifespan) breed.lifespan = lifespan
+
+    await breed.save()
+
+    res.json({
+      success: true,
+      message: 'Race modifiée avec succès',
+      data: { breed }
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+// DELETE /api/dogs/breeds/:id (Admin only)
+export const deleteBreed = async (req, res, next) => {
+  try {
+    const breed = await Breed.findById(req.params.id)
+    if (!breed) {
+      return next(new AppError('Race non trouvée', 404))
+    }
+
+    // Retire la race des favoris de tous les users
+    await User.updateMany(
+        { favorites: req.params.id },
+        { $pull: { favorites: req.params.id } }
+    )
+
+    await Breed.findByIdAndDelete(req.params.id)
+
+    res.json({
+      success: true,
+      message: 'Race supprimée avec succès'
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 // GET /api/dogs/breeds/:id
 export const getBreedById = async (req, res, next) => {
   try {
@@ -206,6 +261,8 @@ export default {
   filterBreeds,
   getBreedById,
   createBreed,
+  updateBreed,
+  deleteBreed,
   addFavorite,
   removeFavorite,
   getFavorites

@@ -11,10 +11,12 @@ import {
   getBreedById,
   searchBreeds,
   filterBreeds,
+  createBreed,
+  updateBreed,
+  deleteBreed,
   addFavorite,
   removeFavorite,
-  getFavorites,
-    createBreed
+  getFavorites
 } from '../controllers/dogsController.js'
 
 const router = express.Router()
@@ -58,6 +60,22 @@ router.post('/breeds/filter', filterBreeds)
  * Body: { size: "string", temperament: "string", activityLevel: "string" }
  */
 router.post('/breeds', verifyToken, requireAdmin, createBreed)
+
+/**
+ * PUT /api/dogs/breeds/:id
+ * Modifie une race existante
+ * PRIVATE (ADMIN)
+ * params: id
+ */
+router.put('/breeds/:id', verifyToken, requireAdmin, updateBreed)
+
+/**
+ * DELETE /api/dogs/breeds/:id
+ * Supprime une race
+ * PRIVATE (ADMIN)
+ * params: id
+ */
+router.delete('/breeds/:id', verifyToken, requireAdmin, deleteBreed)
 
 /**
  * GET /api/dogs/breeds/:id

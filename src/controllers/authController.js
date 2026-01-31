@@ -7,11 +7,17 @@ import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 import { AppError } from '../middleware/errorHandler.js'
 
-// Génère le JWT
-const generateToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRY || '24h'
-  })
+// Génère le JWT userId et role
+const generateToken = (user) => {
+  return jwt.sign(
+      {
+        userId: user._id,
+        role: user.role
+      },
+      process.env.JWT_SECRET,
+      {
+    expiresIn: process.env.JWT_EXPIRY || '24h'}
+  )
 }
 
 // POST /api/auth/signup
@@ -43,7 +49,7 @@ export const signup = async (req, res, next) => {
     })
 
     // Génère le token
-    const token = generateToken(user._id)
+    const token = generateToken(user)
 
     res.status(201).json({
       success: true,
@@ -94,7 +100,7 @@ export const login = async (req, res, next) => {
     await user.save()
 
     // Génère le token
-    const token = generateToken(user._id)
+    const token = generateToken(user)
 
     res.json({
       success: true,

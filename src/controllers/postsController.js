@@ -95,7 +95,6 @@ export const getPostById = async (req, res, next) => {
     if (!post) {
       return next (new AppError('Post non trouvé', 404))
     }
-
     res.json({
       success: true,
       data: { post }
@@ -115,9 +114,12 @@ export const updatePost = async (req, res, next) => {
       return next (new AppError('Post non trouvé', 404))
     }
 
-    // Contrôle l'autorisation de l'user
-    if (post.author.toString() !== req.userId) {
-      return next (new AppError('Tu n\'es malheureusement pas autorisé à modifier ce post', 403))
+    // Contrôle l'autorisation pour l'auteur ou admin
+    const isAuthor = post.author.toString() === req.userId
+    const isAdmin = req.user?.role === 'admin'
+
+    if (!isAuthor && !isAdmin) {
+      return next(new AppError('Vous n\'êtes pas autorisé à modifier ce post', 403))
     }
 
     post.title = title || post.title
@@ -145,9 +147,12 @@ export const deletePost = async (req, res, next) => {
       return next (new AppError('Post non trouvé', 404))
     }
 
-    // Contrôle l'autorisation de l'user
-    if (post.author.toString() !== req.userId) {
-      return next (new AppError('Tu n\'es pas autorisé à supprimer ce post', 403))
+    // Contrôle l'autorisation pour l'auteur ou admin
+    const isAuthor = post.author.toString() === req.userId
+    const isAdmin = req.user?.role === 'admin'
+
+    if (!isAuthor && !isAdmin) {
+      return next(new AppError('Vous n\'êtes pas autorisé à supprimer ce post', 403))
     }
 
     await Post.findByIdAndDelete(req.params.id)
@@ -231,9 +236,12 @@ export const updateComment = async (req, res, next) => {
       return next (new AppError('Commentaire non trouvé', 404))
     }
 
-    // Contrôle-les authorisations
-    if (comment.author.toString() !== req.userId) {
-      return next (new AppError('Tu n\'es pas autorisé à modifier ce commentaire', 403))
+    // Contrôle l'autorisation pour l'auteur ou admin
+    const isAuthor = comment.author.toString() === req.userId
+    const isAdmin = req.user?.role === 'admin'
+
+    if (!isAuthor && !isAdmin) {
+      return next(new AppError('Vous n\'êtes pas autorisé à modifier ce commentaire', 403))
     }
 
     comment.content = content.trim()
@@ -259,9 +267,12 @@ export const deleteComment = async (req, res, next) => {
       return next (new AppError('Commentaire non trouvé', 404))
     }
 
-    // Contrôle-les autorisations
-    if (comment.author.toString() !== req.userId) {
-      return next (new AppError('Tu n\'es pas autorisé à supprimer ce commentaire', 403))
+    // Contrôle l'autorisation pour l'auteur ou admin
+    const isAuthor = comment.author.toString() === req.userId
+    const isAdmin = req.user?.role === 'admin'
+
+    if (!isAuthor && !isAdmin) {
+      return next(new AppError('Vous n\'êtes pas autorisé à supprimer ce commentaire', 403))
     }
 
     await Comment.findByIdAndDelete(req.params.commentId)

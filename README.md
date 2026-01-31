@@ -14,7 +14,7 @@ npm install
 
 ### 2. Configurer l'environnement
 ```bash
-cp .env.example.env
+cp .env.example .env
 # Editer .env avec votre URI MongoDB et secrets JWT
 ```
 
@@ -83,6 +83,10 @@ green-dog-backend/
 | POST    | `/api/dogs/breeds/search` | Public  | Recherche textuelle           |
 | POST    | `/api/dogs/breeds/filter` | Public  | Filtrage par caractéristiques |
 | POST    | `/api/dogs/breeds`        | Admin   | Créer une nouvelle race       |
+| PUT     | `/api/dogs/breeds/:id`    | Admin   | Modifier une race             |
+| DELETE  | `/api/dogs/breeds/:id`    | Admin   | Supprimer une race            |
+
+Le filtrage peut être réalisé côté API (routes dédiées) ou côté client selon le contexte d’utilisation.
 
 ### Favoris
 | Méthode | Route                          | Accès  | Description                   |
@@ -117,6 +121,15 @@ Authorization: Bearer {JWT_TOKEN}
 
 Le token est retourné lors du login/signup.
 
+## Rôles & Admin (développement)
+
+Certaines routes sont réservées au rôle `admin` (ex. création/modification de races).
+
+En production, l’attribution des rôles doit rester contrôlée côté serveur et n’est pas destinée à être modifiée manuellement.
+
+En environnement local, le script de seed (`npm run seed`) peut créer des données de démonstration, incluant éventuellement un utilisateur administrateur (voir `scripts/seedDatabase.js`).  
+Sinon, le rôle peut être défini directement en base de données sur le document `users` via le champ `role` (ex: `admin`).
+
 ## Base de données
 
 MongoDB
@@ -127,7 +140,7 @@ MongoDB
 - **posts** : Publications de la communauté
 - **comments** : Commentaires sur les posts
 
-### Races pre-configurées (seed)
+### Races pré-configurées (seed)
 - Staffordshire Bull Terrier
 - Labrador Retriever
 - Berger Allemand
@@ -152,6 +165,7 @@ NODE_ENV=development
 # Frontend (CORS)
 CLIENT_URL=http://localhost:3000
 ```
+Veiller à aligner CLIENT_URL avec l’URL réelle du frontend.
 
 ## Gestion des erreurs
 
@@ -163,7 +177,7 @@ Toutes les réponses suivent la structure :
   "data": {}
 }
 ```
-> `success` peut-être `true` ou `false`
+> `success` peut être `true` ou `false`
 ```
 
 ### Codes HTTP
