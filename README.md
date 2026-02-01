@@ -215,6 +215,10 @@ npm start
 npm run seed
 ```
 
+## Frontend
+
+Le frontend React est disponible ici : [greendog-frontend](https://github.com/ilumaty/greendog-frontend)
+
 ---
 Projet SAE Institute Geneva - 5FSC0XF101.1
 
