@@ -96,21 +96,24 @@ Le filtrage peut être réalisé côté API (routes dédiées) ou côté client 
 | DELETE  | `/api/dogs/favorites/:breedId` | Privé  | Retirer une race des favoris  |
 
 ### Communauté (Posts)
-| Méthode | Route            | Accès  | Description                |
-|---------|------------------|--------|----------------------------|
-| GET     | `/api/posts`     | Public | Liste des posts (paginée)  |
-| POST    | `/api/posts`     | Privé  | Créer un post              |
-| GET     | `/api/posts/:id` | Public | Détail d'un post           |
-| PUT     | `/api/posts/:id` | Privé  | Modifier un post (auteur)  |
-| DELETE  | `/api/posts/:id` | Privé  | Supprimer un post (auteur) |
+| Méthode | Route            | Accès  | Description                         |
+|---------|------------------|--------|-------------------------------------|
+| GET     | `/api/posts`     | Public | Liste des posts (paginée)           |
+| POST    | `/api/posts`     | Privé  | Créer un post                       |
+| GET     | `/api/posts/:id` | Public | Détail d'un post                    |
+| PUT     | `/api/posts/:id` | Privé  | Modifier un post (auteur ou admin)  |
+| DELETE  | `/api/posts/:id` | Privé  | Supprimer un post (auteur ou admin) |
 
-### Commentaires
+### Commentaires (Backend uniquement - API ready)
+
 | Méthode | Route                                | Accès  | Description            |
 |---------|--------------------------------------|--------|------------------------|
 | GET     | `/api/posts/:id/comments`            | Public | Liste des commentaires |
 | POST    | `/api/posts/:id/comments`            | Privé  | Ajouter un commentaire |
 | PUT     | `/api/posts/:id/comments/:commentId` | Privé  | Modifier (auteur)      |
 | DELETE  | `/api/posts/:id/comments/:commentId` | Privé  | Supprimer (auteur)     |
+
+Routes préparées pour implémentation frontend future.
 
 ## Authentification
 
