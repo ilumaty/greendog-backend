@@ -1,6 +1,6 @@
 <div align="center">
   <img src="docs/Logo_W.png" alt="Green Dog Logo" width="200"/>
-  <h2>Backend API</h2>
+  <h1>Backend API</h1>
 </div>
 
 API Node.js/Express - Plateforme Wiki de partage sur les chiens
@@ -155,7 +155,7 @@ MongoDB
 
 ```env
 # Base de données
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/greendog
+MONGODB_URI=mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<DB_NAME>?retryWrites=true&w=majority
 
 # JWT
 JWT_SECRET=votre_secret_jwt_securise
@@ -166,9 +166,15 @@ PORT=5000
 NODE_ENV=development
 
 # Frontend (CORS)
-CLIENT_URL=http://localhost:3000
+CLIENT_URL=http://localhost:5173
 ```
-Veiller à aligner CLIENT_URL avec l’URL réelle du frontend.
+Veiller à aligner `CLIENT_URL` avec l’URL réelle du frontend.
+
+## Configuration MongoDB
+- **Atlas** : créer un cluster, un utilisateur, autoriser l’IP, puis copier l’URI dans `.env`
+- **Local** : `mongodb://127.0.0.1:27017/greendog`
+- **Docker** : MongoDB via container, même URI locale
+> En environnement de développement, le backend autorise plusieurs ports Vite (`5173`, `5174`, `5179`) afin de faciliter les tests frontend.
 
 ## Gestion des erreurs
 
