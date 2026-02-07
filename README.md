@@ -75,6 +75,9 @@ green-dog-backend/
 | POST    | `/api/auth/change-password` | Privé  | Changer le mot de passe        |
 | POST    | `/api/auth/logout`          | Privé  | Déconnexion                    |
 
+> L’endpoint POST `/change-password` est pleinement fonctionnel côté backend mais n’est pas encore exposé dans l’interface front-end dans le périmètre actuel du projet.
+> Il est prévu pour une future évolution du profil utilisateur (sécurité et gestion du compte).
+
 ### Races de chiens
 | Méthode | Route                     | Accès   | Description                   |
 |---------|---------------------------|---------|-------------------------------|
@@ -104,7 +107,7 @@ Le filtrage peut être réalisé côté API (routes dédiées) ou côté client 
 | PUT     | `/api/posts/:id` | Privé  | Modifier un post (auteur ou admin)  |
 | DELETE  | `/api/posts/:id` | Privé  | Supprimer un post (auteur ou admin) |
 
-### Commentaires (Backend uniquement - API ready)
+### Commentaires (API prête – intégration front-end partielle)
 
 | Méthode | Route                                | Accès  | Description            |
 |---------|--------------------------------------|--------|------------------------|
@@ -113,7 +116,12 @@ Le filtrage peut être réalisé côté API (routes dédiées) ou côté client 
 | PUT     | `/api/posts/:id/comments/:commentId` | Privé  | Modifier (auteur)      |
 | DELETE  | `/api/posts/:id/comments/:commentId` | Privé  | Supprimer (auteur)     |
 
-Routes préparées pour implémentation frontend future.
+Les routes de gestion des commentaires sont entièrement implémentées côté backend.
+Les appels API correspondants (ajout et suppression de commentaires) sont également préparés côté front-end
+(service layer).
+
+L’interface utilisateur complète pour l’affichage et la gestion des commentaires n’a pas été intégrée
+dans le périmètre actuel du projet, mais l’architecture est prête pour une activation future.
 
 ## Authentification
 
