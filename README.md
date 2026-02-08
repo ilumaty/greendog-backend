@@ -229,6 +229,10 @@ npm start
 npm run seed
 ```
 
+## License
+MIT License
+
+
 ## Frontend
 
 Le frontend React est disponible ici : [greendog-frontend](https://github.com/ilumaty/greendog-frontend)
