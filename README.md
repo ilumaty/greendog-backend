@@ -40,20 +40,21 @@ green-dog-backend/
 │   ├── config/
 │   │   └── database.js        # Connexion MongoDB
 │   ├── models/
-│   │   ├── User.js            # Schema user
-│   │   ├── Breed.js           # Schema race de chien
-│   │   ├── Post.js            # Schema post
-│   │   └── Comment.js         # Schema commentaire
+│   │   ├── User.js            # Schéma user
+│   │   ├── Breed.js           # Schéma race de chien
+│   │   ├── Post.js            # Schéma post
+│   │   └── Comment.js         # Schéma commentaire
 │   ├── controllers/
 │   │   ├── authController.js  # Logique authentification
 │   │   ├── dogsController.js  # Logique races
-│   │   └── postsController.js # Logique posts/commentaires
+│   │   ├── postsController.js # Logique posts/commentaires
+│   │   └── adminController.js # Gestion utilisateurs (admin)
 │   ├── routes/
 │   │   ├── authRoutes.js      # Routes authentification
 │   │   ├── dogsRoutes.js      # Routes races
 │   │   └── postsRoutes.js     # Routes posts
 │   ├── middleware/
-│   │   ├── auth.js            # Verification JWT
+│   │   ├── auth.js            # Vérification JWT
 │   │   └── errorHandler.js    # Gestion centralisée des erreurs
 │   └── server.js              # Configuration Express
 ├── scripts/
@@ -132,14 +133,16 @@ Authorization: Bearer {JWT_TOKEN}
 
 Le token est retourné lors du login/signup.
 
-## Rôles & Admin (développement)
+## Admin (gestion utilisateurs)
 
-Certaines routes sont réservées au rôle `admin` (ex. création/modification de races).
+| Méthode | Route                         | Accès | Description                       |
+|---------|-------------------------------|-------|-----------------------------------|
+| GET     | `/api/admin/users`            | Admin | Liste des utilisateurs            |
+| PATCH   | `/api/admin/users/:id/role`   | Admin | Modifier le rôle d’un utilisateur |
 
-En production, l’attribution des rôles doit rester contrôlée côté serveur et n’est pas destinée à être modifiée manuellement.
+- Ces routes sont protégées par JWT (`Authorization: Bearer {token}`) + contrôle du rôle `admin`.
+- Un administrateur ne peut pas modifier son propre rôle.
 
-En environnement local, le script de seed (`npm run seed`) peut créer des données de démonstration, incluant éventuellement un utilisateur administrateur (voir `scripts/seedDatabase.js`).  
-Sinon, le rôle peut être défini directement en base de données sur le document `users` via le champ `role` (ex: `admin`).
 
 ## Base de données
 
@@ -156,7 +159,7 @@ MongoDB
 - Labrador Retriever
 - Berger Allemand
 - Golden Retriever
-- Bouledogue Francais
+- Bouledogue Français
 - Beagle
 
 ## Variables d'environnement
@@ -184,17 +187,33 @@ Veiller à aligner `CLIENT_URL` avec l’URL réelle du frontend.
 - **Docker** : MongoDB via container, même URI locale
 > En environnement de développement, le backend autorise plusieurs ports Vite (`5173`, `5174`, `5179`) afin de faciliter les tests frontend.
 
-## Gestion des erreurs
+## Format des réponses
 
-Toutes les réponses suivent la structure :
+Les réponses API retournent systématiquement un champ `success` (`true/false`).
+Selon l’endpoint, les données peuvent être retournées sous forme de champs dédiés
+(ex: `users`, `user`, `posts`, etc..).
+
+### Exemples
+
 ```json
 {
   "success": true,
-  "message": "Message descriptif",
-  "data": {}
+  "users": [],
+  "count": 0
 }
 ```
-> `success` peut être `true` ou `false`
+```json
+{
+"success": true,
+"message": "Rôle modifié",
+"user": {}
+}
+```
+```json
+{
+"success": false,
+"message": "Description de l'erreur"
+}
 ```
 
 ### Codes HTTP
@@ -210,7 +229,7 @@ Toutes les réponses suivent la structure :
 
 ## Sécurité
 
-- Mots de passe hashes avec bcryptjs
+- Mots de passe hashés avec bcryptjs
 - Authentification par JWT
 - Validation des entrées sur tous les endpoints
 - CORS configurés pour le frontend

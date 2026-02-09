@@ -53,10 +53,12 @@ app.get('/health', (req, res) => {
 import authRoutes from './routes/authRoutes.js'
 import dogsRoutes from './routes/dogsRoutes.js'
 import postsRoutes from './routes/postsRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 app.use('/api/auth', authRoutes)
 app.use('/api/dogs', dogsRoutes)
 app.use('/api/posts', postsRoutes)
+app.use('/api/admin', adminRoutes)
 
 // Handler 404
 app.use((req, res) => {

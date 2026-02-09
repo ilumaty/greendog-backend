@@ -4,11 +4,12 @@ middleware/auth.js
 
 // ** IMPORTS **
 import jwt from 'jsonwebtoken'
+import User from '../models/User.js'
 
 /** Vérification du JSONWEBT
 * Injecte userId et user dans req si valide
 */
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization
     
@@ -27,10 +28,17 @@ export const verifyToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
     req.userId = decoded.userId
-    req.user = {
-      userId: decoded.userId,
-      role: decoded.role
+
+    const user = await User.findById(decoded.userId).select('_id email firstName lastName role')
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'User non trouvé',
+        code: 'USER_NOT_FOUND'
+      })
     }
+
+    req.user = user
 
     next()
   } catch (error) {
