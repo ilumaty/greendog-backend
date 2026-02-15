@@ -170,7 +170,7 @@ MONGODB_URI=mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<DB_NAME>?retryWrites=true
 
 # JWT
 JWT_SECRET=votre_secret_jwt_securise
-JWT_EXPIRES_IN=7d
+JWT_EXPIRES_IN=24h
 
 # Serveur
 PORT=5000

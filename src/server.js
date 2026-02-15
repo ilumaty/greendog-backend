@@ -8,6 +8,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import rateLimit from 'express-rate-limit'
 
 // load les env.
 dotenv.config()
@@ -23,8 +24,21 @@ const NODE_ENV = process.env.NODE_ENV
 // Middlewares
 app.use(helmet())
 
+
+// Rate-Limit
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: {
+    success: false,
+    message: 'Trop de requêtes, réessayez dans 15 minutes.'
+  }
+})
+
+app.use('/api', limiter)
+
 app.use(cors({
-  origin: [
+  origin: process.env.CLIENT_URL ? [process.env.CLIENT_URL] : [
       'http://localhost:5173',
       'http://localhost:5174',
       'http://localhost:5179'],
@@ -88,7 +102,6 @@ async function startServer() {
     mongoose.connection.on('disconnected', () => {
       console.warn('MongoDB est déco')
     })
-
 
 // ***** Lancer le SERVER +log *****
 
